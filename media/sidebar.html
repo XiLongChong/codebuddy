@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{csp}}; script-src 'nonce-{{nonce}}';">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="{{css}}"><title>AI 对话</title></head>
+<body>
+<main id="chat">
+  <nav class="toolbar" aria-label="会话操作">
+    <button id="newChat" title="新建工作区对话">＋ 新对话</button>
+    <button id="history">历史</button>
+    <button id="configure" class="push">配置模型</button>
+  </nav>
+  <section id="messages" tabindex="0" aria-label="对话记录"></section>
+  <div id="approvals"></div>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <section class="composer">
+    <div id="attachments" class="chips"></div>
+    <div class="compose-box">
+      <div id="matches" role="listbox" aria-label="文件和目录" hidden></div>
+      <label class="sr" for="prompt">问题或任务</label>
+      <textarea id="prompt" rows="3" placeholder="询问项目，输入 @ 引用文件或目录"></textarea>
+      <div class="controls">
+        <div class="modes" aria-label="对话模式">
+          <button id="ask" aria-pressed="true">问答</button><button id="agent" aria-pressed="false">Agent</button>
+        </div>
+        <button id="context" title="添加上下文" aria-label="添加上下文" aria-expanded="false">＋</button>
+        <button id="send" class="primary push">发送</button>
+      </div>
+      <div id="contextMenu" class="menu" hidden>
+        <button id="addFile">文件或目录 @</button><button id="addDiagnostics">当前文件诊断</button><button id="addOutput">最近命令输出</button>
+      </div>
+    </div>
+    <div class="model-line" id="modelLabel"></div>
+  </section>
+</main>
+<section id="settings" hidden>
+  <nav class="toolbar"><button id="back">‹ 返回对话</button></nav>
+  <form id="modelForm">
+    <h2>配置模型</h2>
+    <label for="baseUrl">Base URL</label><input id="baseUrl" type="url" placeholder="https://api.openai.com/v1" required>
+    <label for="modelId">模型 ID</label><input id="modelId" type="text" required autocomplete="off">
+    <label for="apiKey">API Key</label><input id="apiKey" type="password" autocomplete="new-password">
+    <p class="muted" id="keyHint">密钥保存在编辑器的 SecretStorage 中。</p>
+    <div class="actions"><button type="submit" id="saveModel" class="primary">保存</button><button type="button" id="testModel" class="secondary">测试连接</button></div>
+    <div id="configNotice" class="notice" role="status" hidden></div>
+  </form>
+</section>
+<script nonce="{{nonce}}" src="{{markdown}}"></script><script nonce="{{nonce}}" src="{{js}}"></script>
+</body></html>
